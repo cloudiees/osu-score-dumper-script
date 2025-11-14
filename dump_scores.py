@@ -121,7 +121,9 @@ def get_maps():
         if not map_batch:
             break
         for map in map_batch:
-            map_executor.submit(insert_map, map)
+            # Make sure we don't add maps w/out leaderboards so we dont check them
+            if [map.ranked] in [RankStatus.APPROVED, RankStatus.LOVED, RankStatus.QUALIFIED, RankStatus.RANKED]:
+                map_executor.submit(insert_map, map)
         offset += 100
         count += len(map_batch)
         print(f"{count} maps scanned")
