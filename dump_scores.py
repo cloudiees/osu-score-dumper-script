@@ -115,14 +115,14 @@ def get_maps():
     offset = 0
     count = 0
     while True:
-        map_batch = api.user_beatmaps(
+        map_batch:list[BeatmapPlaycount] = api.user_beatmaps(
             user_id, UserBeatmapType.MOST_PLAYED, limit=100, offset=offset
         )
         if not map_batch:
             break
         for map in map_batch:
             # Make sure we don't add maps w/out leaderboards so we dont check them
-            if [map.ranked] in [RankStatus.APPROVED, RankStatus.LOVED, RankStatus.QUALIFIED, RankStatus.RANKED]:
+            if map.beatmapset.status in [RankStatus.APPROVED, RankStatus.LOVED, RankStatus.QUALIFIED, RankStatus.RANKED]:
                 map_executor.submit(insert_map, map)
         offset += 100
         count += len(map_batch)
