@@ -16,6 +16,7 @@ api: Ossapi = None
 maps = []
 user_id: int = None
 DATA_PATH = "data.json"
+SLEEP_DELAY = 0.06
 
 # Used to get the enums to strings for adding to the db (because I hate having to reference a table to figure out what the numbers mean)
 ranked_status_dict = {
@@ -134,7 +135,7 @@ def get_maps():
         count += len(map_batch)
         print(f"{count} maps scanned")
         if count == offset:
-            time.sleep(0.06)
+            time.sleep(SLEEP_DELAY)
 
     map_executor.shutdown()
 
@@ -160,7 +161,7 @@ def get_scores():
             print(f"!!!!!!ERROR: {e}")
             status += 1
             print(f"{status}/{len(maps)}")
-            time.sleep(0.06)
+            time.sleep(SLEEP_DELAY)
             continue
         # Going through scores
         mod_combos = {}
@@ -209,10 +210,10 @@ def get_scores():
             except Exception as e:
                 print(f"!!!!!!!!!!!!error: {e}")
             if api_cd_needed:
-                time.sleep(0.06)
+                time.sleep(SLEEP_DELAY)
         status += 1
         print(f"{status}/{len(maps)}")
-        time.sleep(0.06)
+        time.sleep(SLEEP_DELAY)
     score_executor.shutdown()
 
 

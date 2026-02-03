@@ -8,7 +8,7 @@ This is a simple terminal based Python script that dumps all of a user's osu! sc
 
 ## How To Use:
 1. Make sure you have all the requirements setup
-2. Run main.py (google it or gpt it)
+2. Run main.py
 2. Enter in your osu! OAuth credentials
     - To get your osu! OAuth credentials go to your settings page on osu! scroll down to OAuth ([or click here](https://osu.ppy.sh/home/account/edit#oauth)) and click "New OAuth Application"
     - Name it whatever you want then click "Register application" (don't worry about the callback URLs)
@@ -16,7 +16,7 @@ This is a simple terminal based Python script that dumps all of a user's osu! sc
     - When the application asks you for your client secret click "Show client secret" and copy and the "Client Secret" key
 3. Enter either your osu! username or user id (the numbers in your profile url after the "/user/")
 4. Wait... a while
-    - If you want to get a little dangerous you can go into "dump_scores.py" and find all the "sleep()" calls and reduce the time it takes so the application runs faster at your own risk, don't blame me if the API blacklists you are something 
+    - If you want to get a little dangerous you can go into "dump_scores.py" and change "SLEEP_DELAY" to something lower at your own risk, don't blame me if the API blacklists you are something 
 5. Profit (idk have fun with your data)
 
 ## Limitations
