@@ -28,6 +28,12 @@ ranked_status_dict = {
     RankStatus.WIP: "wip",
 }
 
+VALID_STATUSES = {
+    RankStatus.APPROVED,
+    RankStatus.LOVED,
+    RankStatus.QUALIFIED,
+    RankStatus.RANKED
+}
 
 def insert_map(map: BeatmapPlaycount):
     """
@@ -122,12 +128,13 @@ def get_maps():
             break
         for map in map_batch:
             # Make sure we don't add maps w/out leaderboards so we dont check them
-            if map.beatmapset.status in [RankStatus.APPROVED, RankStatus.LOVED, RankStatus.QUALIFIED, RankStatus.RANKED]:
+            if map.beatmapset.status in VALID_STATUSES:
                 map_executor.submit(insert_map, map)
         offset += 100
         count += len(map_batch)
         print(f"{count} maps scanned")
-        time.sleep(0.06)
+        if count == offset:
+            time.sleep(0.06)
 
     map_executor.shutdown()
 
