@@ -9,7 +9,7 @@ with sqlite3.connect("scoredump.db") as con:
     cur = con.cursor()
     cur.execute(
         """
-        SELECT
+        SELECT DISTINCT
             maps.map_id,
             maps.title,
             maps.difficulty_name,
